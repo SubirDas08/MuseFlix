@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="MauiApp1.AboutPage"
+             Title="AboutPage">
+    <VerticalStackLayout>
+        <toolkit:MediaElement x:Name="mediaElement"
+                              ShouldAutoPlay="False" 
+                              HeightRequest="300" 
+                              WidthRequest="500" 
+                              Source="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"/>
+        <Label x:Name="currentTime" Text="Initial Text" />
+        <HorizontalStackLayout BindingContext="{x:Reference mediaElement}">
+            <Button Text="Play"
+                    HorizontalOptions="Center"
+                    Clicked="OnPlayPauseButtonClicked">
+            </Button>
+            <Button Text="Stop"
+                    HorizontalOptions="Center"
+                    Clicked="OnStopButtonClicked">
+            </Button>
+            <FolderPicker x:Name="folderPicker"
+                          Title="Select a folder"
+                          FolderChanged="OnFolderChanged">
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>
