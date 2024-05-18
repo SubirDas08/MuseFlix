@@ -1,7 +1,40 @@
 ﻿@page "/"
+@inject IWebHostEnvironment WebHostEnvironment
 
 <PageTitle>Home</PageTitle>
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
+
+<p>Use the navigation bar at the top of the page to get started.</p>
+
+<p>Current environment: <strong>@WebHostEnvironment.EnvironmentName</strong></p>
+
+@code {
+    private string?[] videoFiles;
+    protected override void OnInitialized()
+    {
+        var videoFolderPath = Path.Combine(WebHostEnvironment.WebRootPath, "Video");
+        videoFiles = Directory.GetFiles(videoFolderPath, "*.mp4").Select(Path.GetFileName).ToArray();
+    }
+}
+
+<div class="video-container">
+    @foreach (var videoFile in videoFiles)
+    {
+        var fileName = Path.GetFileName(videoFile);
+        <video class="video-player" controls width="500">
+            <source src="@($"/Video/{fileName}")" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    }
+</div>
+
+<style>
+    .video-container .video-player {
+        margin: 10px; /* Adjust as needed */
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); /* Add a 3D shadow effect */
+        padding: 10px; /* Add padding */
+    }
+</style>
