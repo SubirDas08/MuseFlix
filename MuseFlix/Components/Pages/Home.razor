@@ -1,5 +1,6 @@
 ﻿@page "/"
 @inject IWebHostEnvironment WebHostEnvironment
+@rendermode InteractiveServer
 
 <PageTitle>Home</PageTitle>
 
@@ -7,12 +8,13 @@
     <h1>My Video App</h1>
 </div>
 
+
 <div class="main-content">
     @foreach (var videoFile in videoFiles)
     {
         var fileName = Path.GetFileName(videoFile);
         <div class="video-card">
-            <video class="video-player" controls width="500">
+            <video class="video-player" controls>
                 <source src="@($"/Video/{fileName}")" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
@@ -58,6 +60,11 @@
         background-color: #fff;
         border-radius: 5px;
     }
+
+        .video-card .video-player {
+            width: 300px;
+            height: auto;
+        }
 
         .video-card .video-title {
             text-align: center;

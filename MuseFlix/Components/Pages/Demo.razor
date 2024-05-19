@@ -1,0 +1,52 @@
+﻿@page "/demo"
+@rendermode InteractiveServer
+
+
+<h3>Demo</h3>
+
+<p role="status">Current count: @currentCount</p>
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+<button class="btn btn-primary" @onclick="ResetCount">Reset Count</button>
+
+@code {
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+
+    private void ResetCount()
+    {
+        currentCount = 0;
+    }
+}
+@for (int i = 1; i <= currentCount; i++)
+{
+    <li>Count : @i</li>
+}
+
+@if (currentCount % 2 == 0)
+{
+    <p>Count is even</p>
+}
+else
+{
+    <p>Count is odd</p>
+}
+
+@if (currentCount > 10)
+{
+    <p>Count is greater than 10</p>
+}
+else
+{
+    <p>Count is less than 10</p>
+}
+
+<input @bind="text" /><button class="btn btn-primary" @onclick="() => text = string.Empty">Clear Text</button>
+<p>@text</p>
+
+@code{
+    private string text = string.Empty;
+}
